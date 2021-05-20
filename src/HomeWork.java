@@ -334,6 +334,35 @@ public class HomeWork {
         );
     }
 
+    @Test //this test will be failed, because article title doesn't have time to load
+    public void testAssertTitle(){
+
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                "Cannot find search input with text 'Search Wikipedia'",
+                5
+        );
+
+        String article_title = "Java";
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text, 'Search…')]"),
+                article_title,
+                "Cannot find search input",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[contains(@resource-id, org.wikipedia:id/page_list_item_container)]//*[contains(@text, 'Object-oriented programming language')]"),
+                "Cannot find article with text 'Object-oriented programming language'",
+                5
+        );
+
+        assertElementPresent(
+                "Cannot find article title"
+                By.xpath("org.wikipedia:id/view_page_title_text")
+        );
+    }
+
 
 
 
@@ -437,6 +466,14 @@ public class HomeWork {
                 .perform();
     }
 
+    private void assertElementPresent(By by, String error_message){
+        List elements = driver.findElements(by);
+        int number_of_elements = elements.size();
 
+        Assert.assertTrue(
+                error_message,
+                number_of_elements == 1
+        );
+    }
 
 }
