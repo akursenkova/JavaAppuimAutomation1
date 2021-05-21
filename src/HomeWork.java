@@ -358,8 +358,9 @@ public class HomeWork {
         );
 
         assertElementPresent(
+                By.id("org.wikipedia:id/view_page_title_text"),
                 "Cannot find article title"
-                By.xpath("org.wikipedia:id/view_page_title_text")
+
         );
     }
 
