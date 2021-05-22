@@ -222,9 +222,15 @@ public class FirstTest extends CoreTestCase {
                 5
         );
 
-        waitForElementAndClick(
+        waitForElementPresent(
                 By.xpath("//*[@text='" + name_of_folder + "']"),
                 "Cannot find created folder",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@text='" + name_of_folder + "']"),
+                "Cannot click created folder",
                 5
         );
 
