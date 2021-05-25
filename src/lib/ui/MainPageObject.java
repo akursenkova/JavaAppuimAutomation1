@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -138,6 +139,33 @@ public class MainPageObject {
     public String waitForElementAndGetAttribute(By by, String attribute, String error_message, long timeoutInSeconds){
         WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
         return element.getAttribute(attribute);
+    }
+
+    public void assertElementHasText(By by, String expected_text, String error_message, long timeoutInSeconds){
+        WebElement text_element = waitForElementPresent(by, error_message, timeoutInSeconds);
+        String actual_text = text_element.getAttribute("text");
+
+        Assert.assertEquals(
+                error_message,
+                expected_text,
+                actual_text
+        );
+    }
+
+    //Method compares number of all search results with number of results containing some text
+    public void assertAllSearchResultsContainSomeText(By by1, By by2, String error_message){
+
+        List<WebElement> listOfAllResults = driver.findElements(by1);
+        int number_of_all_results = listOfAllResults.size();
+
+        List<WebElement> listOfSearchResults = driver.findElements(by2);
+        int number_of_results_with_text = listOfSearchResults.size();
+
+        Assert.assertEquals(
+                error_message,
+                number_of_all_results,
+                number_of_results_with_text
+        );
     }
 }
 
