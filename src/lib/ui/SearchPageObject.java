@@ -24,7 +24,7 @@ public class SearchPageObject extends MainPageObject{
 
     public void initSearchInput(){
         this.waitForElementAndClick(By.xpath(SEARCH_INIT_ELEMENT), "Cannot find and click init element", 5);
-        this.waitForElementPresent(By.xpath(SEARCH_INIT_ELEMENT), "Cannot find search input after clicking search init element");
+        this.waitForElementPresent(By.xpath(SEARCH_INPUT), "Cannot find search input after clicking search init element");
     }
 
     public void waitForCancelButtonAppear(){
@@ -53,7 +53,7 @@ public class SearchPageObject extends MainPageObject{
     }
 
     public void waitForSearchResultsDisappear(){
-        this.waitForElementNotPresent(By.id(SEARCH_RESULTS), "Cannot find search results", 15);
+        this.waitForElementNotPresent(By.id(SEARCH_RESULTS), "Still find search results", 15);
     }
 
     public void clickByArticleWithSubstring(String substring){

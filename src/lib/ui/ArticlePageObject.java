@@ -1,8 +1,11 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class ArticlePageObject extends MainPageObject{
 
@@ -145,6 +148,16 @@ public class ArticlePageObject extends MainPageObject{
                 By.xpath(folder_name_xpath),
                 "Cannot find created folder to add article",
                 5
+        );
+    }
+
+    public void assertTitlePresent(){
+        List elements = driver.findElements(By.id(TITLE));
+        int number_of_elements = elements.size();
+
+        Assert.assertTrue(
+                "Cannot find article title",
+                number_of_elements == 1
         );
     }
 }
