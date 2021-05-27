@@ -16,9 +16,6 @@ import java.util.List;
 
 public class MainPageObject {
 
-    private static final String
-            INPUT_TEXT = "//*[contains(@text, 'Search…')]";
-
     protected AppiumDriver driver;
 
     public MainPageObject(AppiumDriver driver){
@@ -145,18 +142,6 @@ public class MainPageObject {
         return element.getAttribute(attribute);
     }
 
-    public void assertElementHasText(){
-        String expected_text = "Search…";
-        String error_message = "Cannot find search input with text 'Search…'";
-        WebElement text_element = waitForElementPresent(By.xpath(INPUT_TEXT), error_message, 5);
-        String actual_text = text_element.getAttribute("text");
-
-        Assert.assertEquals(
-                error_message,
-                expected_text,
-                actual_text
-        );
-    }
 
     //Method compares number of all search results with number of results containing some text
     public void assertAllSearchResultsContainSomeText(By by1, By by2, String error_message){

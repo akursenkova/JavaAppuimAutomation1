@@ -1,7 +1,9 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class SearchPageObject extends MainPageObject{
 
@@ -25,6 +27,19 @@ public class SearchPageObject extends MainPageObject{
     public void initSearchInput(){
         this.waitForElementAndClick(By.xpath(SEARCH_INIT_ELEMENT), "Cannot find and click init element", 5);
         this.waitForElementPresent(By.xpath(SEARCH_INPUT), "Cannot find search input after clicking search init element");
+    }
+
+    public void assertElementHasText(){
+        String expected_text = "Search…";
+        String error_message = "Cannot find search input with text 'Search…'";
+        WebElement text_element = waitForElementPresent(By.xpath(SEARCH_INPUT), error_message, 5);
+        String actual_text = text_element.getAttribute("text");
+
+        Assert.assertEquals(
+                error_message,
+                expected_text,
+                actual_text
+        );
     }
 
     public void waitForCancelButtonAppear(){
