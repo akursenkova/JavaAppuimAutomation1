@@ -1,6 +1,7 @@
 import lib.CoreTestCase;
 import lib.ui.*;
 import org.junit.Test;
+import org.openqa.selenium.By;
 
 
 public class HomeWork extends CoreTestCase {
@@ -11,6 +12,7 @@ public class HomeWork extends CoreTestCase {
 
         SearchPageObject SearchPageObject = new SearchPageObject(driver);
         SearchPageObject.initSearchInput();
+        SearchPageObject.assertElementHasText();
     }
 
 
@@ -35,6 +37,7 @@ public class HomeWork extends CoreTestCase {
         SearchPageObject.initSearchInput();
         String searched_text = "Java";
         SearchPageObject.typeSearchLine(searched_text);
+        SearchPageObject.waitForSearchResult(searched_text);
         SearchPageObject.compareSearchResults(searched_text);
     }
 
@@ -73,7 +76,6 @@ public class HomeWork extends CoreTestCase {
         MyListsPageObject MyListsPageObject = new MyListsPageObject(driver);
         MyListsPageObject.openFolderByName(name_of_folder);
         MyListsPageObject.swipeByArticleToDelete(first_article_title);
-        MyListsPageObject.clickArticleByTitle(second_article_title);
         MyListsPageObject.clickArticleAndCompareTitle(second_article_title);
     }
 
