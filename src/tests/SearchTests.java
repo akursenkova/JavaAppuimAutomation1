@@ -52,4 +52,12 @@ public class SearchTests extends CoreTestCase {
         SearchPageObject.assertThereIsNoResultOfSearch();
     }
 
+    @Test
+    public void testFindArticleByTitleAndDescription(){
+
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject.initSearchInput();
+        SearchPageObject.typeSearchLine("Java");
+        SearchPageObject.waitForArticleWithTitleAndDescription("Java", "Island of Indonesia");
+    }
 }
