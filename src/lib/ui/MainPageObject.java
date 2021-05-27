@@ -16,11 +16,15 @@ import java.util.List;
 
 public class MainPageObject {
 
+    private static final String
+            INPUT_TEXT = "//*[contains(@text, 'Search…')]";
+
     protected AppiumDriver driver;
 
     public MainPageObject(AppiumDriver driver){
         this.driver = driver;
     }
+
 
     public WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds){
 
@@ -141,8 +145,10 @@ public class MainPageObject {
         return element.getAttribute(attribute);
     }
 
-    public void assertElementHasText(By by, String expected_text, String error_message, long timeoutInSeconds){
-        WebElement text_element = waitForElementPresent(by, error_message, timeoutInSeconds);
+    public void assertElementHasText(){
+        String expected_text = "Search…";
+        String error_message = "Cannot find search input with text 'Search…'";
+        WebElement text_element = waitForElementPresent(By.xpath(INPUT_TEXT), error_message, 5);
         String actual_text = text_element.getAttribute("text");
 
         Assert.assertEquals(
