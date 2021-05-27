@@ -4,7 +4,7 @@ import lib.CoreTestCase;
 import lib.ui.SearchPageObject;
 import org.junit.Test;
 
-public class SearchTest extends CoreTestCase {
+public class SearchTests extends CoreTestCase {
 
     @Test
     public void testSearch() {
@@ -51,4 +51,5 @@ public class SearchTest extends CoreTestCase {
         SearchPageObject.waitForEmptyResultLabel();
         SearchPageObject.assertThereIsNoResultOfSearch();
     }
+
 }
