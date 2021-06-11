@@ -27,13 +27,13 @@ public class MyListsPageObject extends MainPageObject{
     public void openFolderByName(String name_of_folder){
         String folder_name_xpath = getFolderXpathByName(name_of_folder);
         this.waitForElementPresent(
-                By.xpath(folder_name_xpath),
+                folder_name_xpath,
                 "Cannot find folder by name " + name_of_folder,
                 5
         );
 
         this.waitForElementAndClick(
-                By.xpath(folder_name_xpath),
+                folder_name_xpath,
                 "Cannot click folder " + name_of_folder,
                 5
         );
@@ -43,7 +43,7 @@ public class MyListsPageObject extends MainPageObject{
         this.waitForArticleToAppear(article_title);
         String article_xpath = getSavedArticleXpathByTitle(article_title);
         this.swipeElementToLeft(
-                By.xpath(article_xpath),
+                article_xpath,
                 "Cannot find saved article"
         );
         this.waitForArticleToDisappear(article_title);
@@ -52,7 +52,7 @@ public class MyListsPageObject extends MainPageObject{
     public void waitForArticleToDisappear(String article_title){
         String article_xpath = getSavedArticleXpathByTitle(article_title);
         this.waitForElementNotPresent(
-                By.xpath(article_xpath),
+                article_xpath,
                 "Saved article still present with title " + article_title,
                 15
         );
@@ -61,7 +61,7 @@ public class MyListsPageObject extends MainPageObject{
     public void waitForArticleToAppear(String article_title){
         String article_xpath = getSavedArticleXpathByTitle(article_title);
         this.waitForElementPresent(
-                By.xpath(article_xpath),
+                article_xpath,
                 "Cannot find saved article by title " + article_title,
                 15
         );
@@ -70,13 +70,13 @@ public class MyListsPageObject extends MainPageObject{
     public void clickArticleByTitle(String article_title){
         String article_xpath = getSavedArticleXpathByTitle(article_title);
         waitForElementPresent(
-                By.xpath(article_xpath),
+                article_xpath,
                 "Cannot find article " + article_title,
                 5
         );
 
         waitForElementAndClick(
-                By.xpath(article_xpath),
+                article_xpath,
                 "Cannot find article " + article_title,
                 5
         );
@@ -86,7 +86,7 @@ public class MyListsPageObject extends MainPageObject{
     public void compareArticleTitle(String article_title){
 
         WebElement title_element = waitForElementPresent(
-                By.id(ARTICLE_TITLE),
+                ARTICLE_TITLE,
                 "Cannot find article title",
                 15
         );
