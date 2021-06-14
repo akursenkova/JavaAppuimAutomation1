@@ -1,16 +1,20 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.touch.offset.PointOption;
+import lib.Platform;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class MyListsPageObject extends MainPageObject{
+abstract public class MyListsPageObject extends MainPageObject{
 
-    public static final String
-            FOLDER_BY_NAME_TPL = "//*[@text='{FOLDER_NAME}']",
-            ARTICLE_BY_TITLE_TPL = "//*[@text='{TITLE}']",
-            ARTICLE_TITLE = "org.wikipedia:id/view_page_title_text";
+    protected static String
+            FOLDER_BY_NAME_TPL,
+            ARTICLE_BY_TITLE_TPL,
+            ARTICLE_TITLE,
+            CLOSE_ALERT_BUTTON,
+            DELETE_ARTICLE_BUTTON;
 
     private static String getFolderXpathByName(String name_of_folder){
         return FOLDER_BY_NAME_TPL.replace("{FOLDER_NAME}", name_of_folder);
@@ -39,6 +43,12 @@ public class MyListsPageObject extends MainPageObject{
         );
     }
 
+    public void closeAlertSyncArticles(){
+        if (Platform.getInstance().isIOS()){
+            this.waitForElementAndClick(CLOSE_ALERT_BUTTON, "Cannot find and click close alert button", 5);
+        }
+    }
+
     public void swipeByArticleToDelete(String article_title){
         this.waitForArticleToAppear(article_title);
         String article_xpath = getSavedArticleXpathByTitle(article_title);
@@ -46,6 +56,10 @@ public class MyListsPageObject extends MainPageObject{
                 article_xpath,
                 "Cannot find saved article"
         );
+
+        if (Platform.getInstance().isIOS()){
+            this.waitForElementAndClick(DELETE_ARTICLE_BUTTON, "Cannot find and click delete button", 5);
+        }
         this.waitForArticleToDisappear(article_title);
     }
 
