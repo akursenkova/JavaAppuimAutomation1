@@ -2,10 +2,7 @@ package tests;
 
 import lib.CoreTestCase;
 import lib.Platform;
-import lib.ui.ArticlePageObject;
-import lib.ui.MyListsPageObject;
-import lib.ui.NavigationUI;
-import lib.ui.SearchPageObject;
+import lib.ui.*;
 import lib.ui.factories.ArticlePageObjectFactory;
 import lib.ui.factories.MyListsPageObjectFactory;
 import lib.ui.factories.NavigationUIFactory;
@@ -36,18 +33,18 @@ public class MyListTests extends CoreTestCase {
             SearchPageObject.clickCancelSearch();
         }
 
-
         NavigationUI NavigationUI = NavigationUIFactory.get(driver);
         NavigationUI.clickMyList();
 
         MyListsPageObject MyListsPageObject = MyListsPageObjectFactory.get(driver);
+
         if (Platform.getInstance().isIOS()){
             MyListsPageObject.closeAlertSyncArticles();
-        }
-
-        if (Platform.getInstance().isAndroid()){
+        } else {
             MyListsPageObject.openFolderByName(name_of_folder);
         }
+
         MyListsPageObject.swipeByArticleToDelete(article_title);
     }
+
 }
